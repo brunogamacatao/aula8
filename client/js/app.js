@@ -14,15 +14,15 @@ app.config([
     '$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('principal', {
+            .state('listagem', {
                 url: '/',
-                templateUrl: 'principal.html',
-                controller: 'TesteController'
+                templateUrl: 'listagem.html',
+                controller: 'PessoasController'
             })
-            .state('teste', {
-                url: '/teste',
-                templateUrl: 'teste.html',
-                controller: 'TesteController'
+            .state('formulario', {
+                url: '/formulario',
+                templateUrl: 'formulario.html',
+                controller: 'PessoasController'
             });
         $urlRouterProvider.otherwise('/');
     }

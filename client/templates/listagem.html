@@ -1,0 +1,21 @@
+<p>Filtrar: <input ng-model="filtro"></p>
+<hr/>
+<table>
+    <thead>
+        <tr>
+        <th ng-click="ordenaPor('nome')">Nome</th>
+        <th ng-click="ordenaPor('telefone')">Telefone</th>
+        <th>Ativo</th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="p in pessoas|orderBy: ordem|filter: filtro">
+        <td>{{p.nome}}</td><td>{{p.telefone}}</td><td>{{p.ativo}}</td>
+        <td>
+            <button ng-click="selecionar(p)">Selecionar</button>
+            <button ng-click="excluir(p)">X</button>
+        </td>
+        </tr>
+    </tbody>
+</table>

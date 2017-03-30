@@ -4,41 +4,19 @@
     <meta charset="UTF-8">
   </head>
   <body>
-    <h1>Template de Página</h1>
-    <div ng-controller="PessoasController">
-      <p>Nome: <input ng-model="pessoa.nome"></p>
-      <p>Telefone: <input ng-model="pessoa.telefone"></p>
-      <p>Ativo: <input type="checkbox" ng-model="pessoa.ativo"></p>
-      <p>
-        <button ng-click='novo()'>Novo</button>
-        <button ng-click='salvar()'>Salvar</button>
-      </p>
-      <hr/>
-      <p>Filtrar: <input ng-model="filtro"></p>
-      <hr/>
-      <table>
-        <thead>
-          <tr>
-            <th ng-click="ordenaPor('nome')">Nome</th>
-            <th ng-click="ordenaPor('telefone')">Telefone</th>
-            <th>Ativo</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="p in pessoas|orderBy: ordem|filter: filtro">
-            <td>{{p.nome}}</td><td>{{p.telefone}}</td><td>{{p.ativo}}</td>
-            <td>
-              <button ng-click="selecionar(p)">Selecionar</button>
-              <button ng-click="excluir(p)">X</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <header>
+      <h1>Cabeçalho</h1>
+    </header>
+    <nav>
+      <a ui-sref="formulario">Novo</a> | 
+      <a ui-sref="listagem">Listagem</a>
+    </nav>
 
     <!-- AQUI É ONDE OS TEMPLATES SERÃO INSERIDOS -->
     <ui-view></ui-view>
 
+    <footer>
+      <h3>Rodapé</h3>
+    </footer>
   </body>
 </html>
