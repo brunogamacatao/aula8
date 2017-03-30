@@ -42,3 +42,11 @@ controllers.controller('PessoasController', ['$scope', 'Pessoa' , function($scop
     });
   };
 }]);
+
+// Teste Controller
+controllers.controller('TesteController', [
+  '$scope' , 
+  function($scope) {
+    // Aqui vem o código do controlador
+  }
+]);

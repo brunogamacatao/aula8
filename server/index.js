@@ -24,6 +24,7 @@ mongoose.connection.once('open', function() {
 
   app.use(express.static(path.join(__dirname, '../public')));
   app.use(express.static(path.join(__dirname, '../build')));
+  app.use(express.static(path.join(__dirname, '../client/templates')));
 
   // URL_BASE, DEFINIÇÃO DAS ROTAS
   app.use('/pessoas', require('./routes/pessoas'));
