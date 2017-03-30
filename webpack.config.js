@@ -1,10 +1,11 @@
 var webpack = require('webpack');
 var HtmlPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 module.exports = {
   entry: './client/js/app.js',
   output: {
-    path: './build',
+    path: path.join(__dirname, 'build'),
     filename: 'app.bundle.js'
   },
   plugins: [
