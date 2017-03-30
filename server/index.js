@@ -7,6 +7,12 @@ import bodyParser   from 'body-parser';
 import mongoose     from 'mongoose';
 import config       from './config';
 
+// Autenticação
+import expressSession from 'express-session';
+import passport from 'passport';
+import Strategy from 'passport-local';
+import Usuario from './model/usuario';
+
 // Abre uma conexão com o banco de dados
 mongoose.connect(config.URL_BANCO_DE_DADOS);
 
@@ -22,9 +28,23 @@ mongoose.connection.once('open', function() {
   app.use(cookieParser());
   app.use(compression()); // Ligar a compressão gzip
 
+  // Recursos estáticos
   app.use(express.static(path.join(__dirname, '../public')));
   app.use(express.static(path.join(__dirname, '../build')));
   app.use(express.static(path.join(__dirname, '../client/templates')));
+
+  // Segurança
+  var sessionParams = {
+    secret: 'TAP Facisa',
+    resave: false,
+    saveUnitialized: false
+  };
+  app.use(expressSession(sessionParams));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  passport.use(new Strategy(Usuario.authenticate()));
+  passport.serializeUser(Usuario.serializeUser());
+  passport.deserializeUser(Usuario.deserializeUser());
 
   // URL_BASE, DEFINIÇÃO DAS ROTAS
   app.use('/pessoas', require('./routes/pessoas'));
