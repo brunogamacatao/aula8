@@ -88,10 +88,10 @@ services.factory('AuthService', // Nome do serviço
       $http.get('/usuarios/logout')
         // handle success
         .then(function success(data) {
-          user = false;
+          usuario = false;
           deferred.resolve();
         }, function error(data) {
-          user = false;
+          usuario = false;
           deferred.reject();
         });
 

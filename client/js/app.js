@@ -1,10 +1,6 @@
 import angular from 'angular'; // Importa o angular
 import 'angular-ui-router';    // Importa o roteador
 
-// Importa as folhas de estilo
-require('bootstrap-webpack');
-require('../css/style.css');
-
 import './services';    // Importa os serviços
 import './controllers'; // Importa os controladores
 
