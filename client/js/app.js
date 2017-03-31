@@ -1,6 +1,10 @@
 import angular from 'angular'; // Importa o angular
 import 'angular-ui-router';    // Importa o roteador
 
+// Importa as folhas de estilo
+require('bootstrap-webpack');
+require('../css/style.css');
+
 import './services';    // Importa os serviços
 import './controllers'; // Importa os controladores
 
@@ -14,16 +18,62 @@ app.config([
     '$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('listagem', {
+            .state('login', {
                 url: '/',
-                templateUrl: 'listagem.html',
-                controller: 'PessoasController'
+                templateUrl: 'usuarios/login.html',
+                controller: 'LoginController',
+                authenticate: false
+            })
+            .state('logout', {
+                url: '/logout',
+                controller: 'LogoutController',
+                authenticate: false
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: 'usuarios/novo.html',
+                controller: 'RegisterController',
+                authenticate: false
+            })
+            .state('listagem', {
+                url: '/listagem',
+                templateUrl: 'pessoas/listagem.html',
+                controller: 'PessoasController',
+                authenticate: true
             })
             .state('formulario', {
                 url: '/formulario',
-                templateUrl: 'formulario.html',
-                controller: 'PessoasController'
-            });
+                templateUrl: 'pessoas/formulario.html',
+                controller: 'PessoasController',
+                authenticate: true
+            })
+
         $urlRouterProvider.otherwise('/');
+    }
+]);
+
+// Configuração da autenticação
+app.run([
+    '$rootScope', '$state', 'AuthService',  // Dependências
+    function ($rootScope, $state, AuthService) { // Implementação
+        $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams) {
+            if (toState.authenticate) {
+                function handleLogout() {
+                    AuthService.setUserStatus(false);
+                    $rootScope.$emit('logout');
+                    $state.transitionTo('login');
+                    event.preventDefault();        
+                }
+
+                AuthService.getUserStatus().then(function success(data) {
+                    if (data.data.status) {
+                        AuthService.setUserStatus(true);
+                        $rootScope.$emit('login');
+                    } else {
+                        handleLogout();
+                    }
+                }, handleLogout);
+            }
+        });
     }
 ]);

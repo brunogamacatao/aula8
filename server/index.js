@@ -47,14 +47,16 @@ mongoose.connection.once('open', function() {
   passport.deserializeUser(Usuario.deserializeUser());
 
   // URL_BASE, DEFINIÇÃO DAS ROTAS
+  app.use('/usuarios', require('./routes/usuarios'));
   app.use('/pessoas', require('./routes/pessoas'));
 
   app.use(pageForFoundErrorHandler);
   app.use(generalErrorHandler);
 
   // Inicia o servidor web
-  app.listen(3000, function() {
-    console.log('Servidor ouvindo na porta 3000');
+  app.listen(config.PORTA_DO_SERVIDOR, function() {
+    console.log(`Servidor ouvindo na porta ${config.PORTA_DO_SERVIDOR}`);
+    console.log(`Acesse http://localhost:${config.PORTA_DO_SERVIDOR}`);
   });
 });
 
