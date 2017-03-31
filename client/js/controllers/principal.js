@@ -3,6 +3,11 @@ import angular from 'angular';
 // Obtém a referência para o módulo
 const controllers = angular.module('aula8.controllers');
 
+controllers.controller('PrincipalController', 
+  ['$scope', '$rootScope', '$state', 'AuthService',
+  function ($scope, $rootScope, $state, AuthService) {
+}]);
+
 // Teste Controller
 controllers.controller('NavbarController', 
   ['$scope', '$rootScope', '$state', 'AuthService',

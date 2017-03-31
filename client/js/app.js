@@ -31,6 +31,12 @@ app.config([
                 controller: 'RegisterController',
                 authenticate: false
             })
+            .state('index', {
+                url: '/principal',
+                templateUrl: 'principal/index.html',
+                controller: 'PrincipalController',
+                authenticate: true
+            })
             .state('listagem', {
                 url: '/listagem',
                 templateUrl: 'pessoas/listagem.html',
